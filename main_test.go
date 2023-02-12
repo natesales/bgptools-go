@@ -1,4 +1,4 @@
-package main
+package bgptools
 
 import (
 	"testing"
@@ -26,7 +26,7 @@ func TestParse(t *testing.T) {
 	}
 
 	for _, tc := range tcs {
-		out, err := Parse(tc.in)
+		out, err := parse(tc.in)
 		if tc.shouldError {
 			assert.NotNil(t, err)
 		} else {
