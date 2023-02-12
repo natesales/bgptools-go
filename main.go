@@ -9,8 +9,6 @@ import (
 	"time"
 )
 
-var errInvalidFormat = fmt.Errorf("invalid return format")
-
 type Response struct {
 	AS        uint32
 	IP        string
@@ -27,13 +25,13 @@ func parse(s string) (*Response, error) {
 
 	lines := strings.Split(strings.TrimSpace(s), "\n")
 	if len(lines) != 2 {
-		return nil, errInvalidFormat
+		return nil, fmt.Errorf("invalid return format: %s", s)
 	}
 
 	d := strings.Split(lines[1], "|")
 	as, err := strconv.Atoi(strings.TrimSpace(d[0]))
 	if err != nil {
-		return nil, errInvalidFormat
+		return nil, fmt.Errorf("invalid return format: %s", s)
 	}
 
 	r.AS = uint32(as)
